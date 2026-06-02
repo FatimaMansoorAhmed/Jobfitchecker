@@ -70,7 +70,23 @@ export default function Home() {
           <h1 className="text-4xl font-bold text-gray-900 mb-2">JobFitCheck</h1>
           <p className="text-gray-600 text-lg">
             AI agent that scores how well your resume fits any job
+            Upload your resume and compare it against any job posting in under 30 seconds.
           </p>
+          
+<div className="mb-8 bg-white p-6 rounded-lg shadow-sm border">
+  <h2 className="text-xl font-semibold mb-3">
+    Why JobFitCheck exists
+  </h2>
+
+ 
+
+  <p className="text-gray-600 mt-3">
+    JobFitCheck was built to answer one simple question before applying:
+    "How well does my resume fit this job?" Upload your resume, paste a
+    job posting, and get instant feedback on your match.
+  </p>
+</div>
+
         </div>
 
         <UploadForm onAnalyze={handleAnalyze} loading={loading} />
