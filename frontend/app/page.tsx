@@ -60,25 +60,30 @@ export default function Home() {
     } finally {
       setLoading(false);
     }
-  };return (
-  <main className="min-h-screen bg-[#0b0f19] text-[#f8fafc] px-4 py-12">
-    <div className="mt-8 max-w-xl mx-auto text-left relative bg-[#151d30] border border-[#222f4c] rounded-xl p-6 shadow-xl">
-      {/* Tailwind v4 linear gradient syntax */}
-      <div className="absolute left-0 top-0 w-1 h-full bg-linear-to-b from-[#222f4c] to-transparent rounded-l-xl"></div>
+  };
 
-      <div className="pl-2">
-        <div className="flex items-center gap-2 mb-3">
-          <span className="w-2 h-2 bg-[#64748b] rounded-full animate-pulse"></span>
-          <p className="text-xs text-[#64748b] font-semibold tracking-wider uppercase">
-            Why JobFitCheck exists
+  return (
+  <main className="min-h-screen bg-slate-50 text-gray-900 px-4 py-12">
+      <div className="max-w-2xl mx-auto">
+
+        <div className="mb-10 text-center">
+          <h1 className="text-4xl font-bold text-gray-900 mb-2">JobFitCheck</h1>
+          <p className="text-gray-600 text-lg">
+            
+            AI agent that scores how well your resume fits any job
+            Upload your resume and compare it against any job posting in under 30 seconds.
           </p>
         </div>
 
-        <p className="text-[#64748b] mt-3 leading-relaxed text-sm">
-          This tool gives you an instant match score so you can improve your resume
-          before applying instead of guessing afterward.
-        </p>
+        <UploadForm onAnalyze={handleAnalyze} loading={loading} />
+
+        {(loading || steps.length > 0) && (
+          <AgentTrace steps={steps} loading={loading} />
+        )}
+
+        {result && <ScoreCard result={result} />}
+
       </div>
-    </div>
-  </main>
-);}
+    </main>
+  );
+}

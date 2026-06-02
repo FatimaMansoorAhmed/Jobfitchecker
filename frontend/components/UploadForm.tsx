@@ -16,16 +16,31 @@ export default function UploadForm({ onAnalyze, loading }: Props) {
     onAnalyze(resume, jobUrl);
   };
 return (
-  <div className="bg-[#151d30] rounded-xl p-6 mb-6 border border-[#222f4c] shadow-xl">
+  <div className="bg-[#111111] rounded-3xl p-8 mb-6 border border-[#2a2a2a] shadow-lg">
 
-    {/* Resume Upload Input */}
-    <div className="mb-4">
-      <label className="block text-xs font-semibold uppercase tracking-wider text-[#64748b] mb-2">Resume (PDF)</label>
-      <label className="flex items-center gap-3 border border-dashed border-[#222f4c] bg-[#0b0f19] rounded-xl p-4 cursor-pointer hover:border-[#64748b] transition-colors group">
-        <Upload size={18} className="text-[#64748b] group-hover:text-[#f8fafc] transition-colors" />
-        <span className="text-[#64748b] group-hover:text-[#f8fafc] text-sm transition-colors">
-          {resume ? resume.name : "Click to upload your resume"}
-        </span>
+    {/* Resume Upload */}
+    <div className="mb-6">
+
+      <label className="block text-sm text-gray-500 uppercase tracking-wide mb-3">
+        Resume (PDF)
+      </label>
+
+      <label className="flex items-center gap-4 border border-dashed border-[#2f2f2f] rounded-2xl p-5 cursor-pointer hover:border-white/30 hover:bg-[#151515] transition-all duration-300">
+
+        <div className="bg-black border border-[#2a2a2a] rounded-xl p-3">
+          <Upload size={20} className="text-white" />
+        </div>
+
+        <div className="flex flex-col">
+          <span className="text-gray-200 text-sm font-medium">
+            {resume ? resume.name : "Click to upload your resume"}
+          </span>
+
+          <span className="text-gray-500 text-xs mt-1">
+            PDF files only
+          </span>
+        </div>
+
         <input
           type="file"
           accept=".pdf"
@@ -33,36 +48,42 @@ return (
           onChange={(e) => setResume(e.target.files?.[0] || null)}
         />
       </label>
+
     </div>
 
-    {/* Job Posting URL Input */}
-    <div className="mb-6">
-      <label className="block text-xs font-semibold uppercase tracking-wider text-[#64748b] mb-2">Job posting URL</label>
-      <div className="flex items-center gap-2 bg-[#0b0f19] rounded-xl px-4 py-3.5 border border-[#222f4c] focus-within:border-[#64748b] transition-colors">
-        <Link size={16} className="text-[#64748b] shrink-0" />
+    {/* Job URL */}
+    <div className="mb-8">
+
+      <label className="block text-sm text-gray-500 uppercase tracking-wide mb-3">
+        Job Posting URL
+      </label>
+
+      <div className="flex items-center gap-3 bg-black rounded-2xl px-5 py-4 border border-[#2a2a2a] focus-within:border-white/30 transition-all duration-300">
+
+        <Link
+          size={18}
+          className="text-gray-400 shrink-0"
+        />
+
         <input
           type="text"
           placeholder="https://rozee.pk/job/..."
           value={jobUrl}
           onChange={(e) => setJobUrl(e.target.value)}
-          className="bg-transparent text-[#f8fafc] text-sm w-full outline-none placeholder-[#334155]"
+          className="bg-transparent text-white text-sm w-full outline-none placeholder:text-gray-600"
         />
+
       </div>
+
     </div>
 
-    {/* High-Contrast Theme Button */}
+    {/* Submit Button */}
     <button
       onClick={handleSubmit}
       disabled={loading}
-      className="w-full bg-[#f8fafc] hover:bg-white text-[#0b0f19] font-bold py-3.5 rounded-xl transition-all shadow-md active:scale-[0.99] disabled:bg-[#222f4c] disabled:text-[#64748b] disabled:cursor-not-allowed disabled:transform-none flex items-center justify-center gap-2"
+      className="w-full bg-white hover:bg-gray-200 disabled:bg-[#222222] disabled:text-gray-500 disabled:cursor-not-allowed text-black font-semibold py-4 rounded-2xl transition-all duration-300"
     >
-      {loading ? (
-        "Analyzing..."
-      ) : (
-        <>
-          Analyze <span className="text-sm font-normal">→</span>
-        </>
-      )}
+      {loading ? "Analyzing..." : "Analyze Resume →"}
     </button>
 
   </div>
