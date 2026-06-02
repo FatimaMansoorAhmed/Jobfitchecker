@@ -1,0 +1,9 @@
+fastapi
+uvicorn
+langgraph
+langchain-groq
+pymupdf
+beautifulsoup4
+requests
+python-dotenv
+python-multipart
