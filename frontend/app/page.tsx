@@ -62,8 +62,7 @@ export default function Home() {
     }
   };
 
-  return (
-  <main className="min-h-screen bg-slate-50 text-gray-900 px-4 py-12">
+  return (<main className="min-h-screen bg-slate-50 text-gray-900 px-4 py-12">
       <div className="max-w-2xl mx-auto">
 
         <div className="mb-10 text-center">
