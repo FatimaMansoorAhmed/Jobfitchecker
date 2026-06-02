@@ -60,34 +60,25 @@ export default function Home() {
     } finally {
       setLoading(false);
     }
-  };
+  };return (
+  <main className="min-h-screen bg-[#0b0f19] text-[#f8fafc] px-4 py-12">
+    <div className="mt-8 max-w-xl mx-auto text-left relative bg-[#151d30] border border-[#222f4c] rounded-xl p-6 shadow-xl">
+      {/* Tailwind v4 linear gradient syntax */}
+      <div className="absolute left-0 top-0 w-1 h-full bg-linear-to-b from-[#222f4c] to-transparent rounded-l-xl"></div>
 
-  return (
-  <main className="min-h-screen bg-slate-50 text-gray-900 px-4 py-12">
-     <div className="mt-8 max-w-xl mx-auto text-left relative">
-  {/* subtle background glow */}
-  <div className="absolute -left-4 top-0 w-1 h-full bg-gradient-to-b from-blue-500 to-transparent rounded-full opacity-70"></div>
+      <div className="pl-2">
+        <div className="flex items-center gap-2 mb-3">
+          <span className="w-2 h-2 bg-[#64748b] rounded-full animate-pulse"></span>
+          <p className="text-xs text-[#64748b] font-semibold tracking-wider uppercase">
+            Why JobFitCheck exists
+          </p>
+        </div>
 
-  <div className="pl-4">
-    <div className="flex items-center gap-2 mb-2">
-      <span className="w-2 h-2 bg-blue-500 rounded-full animate-pulse"></span>
-      <p className="text-sm text-blue-600 font-semibold tracking-wide uppercase">
-        Why JobFitCheck exists
-      </p>
+        <p className="text-[#64748b] mt-3 leading-relaxed text-sm">
+          This tool gives you an instant match score so you can improve your resume
+          before applying instead of guessing afterward.
+        </p>
+      </div>
     </div>
-
-    <p className="text-gray-600 leading-relaxed">
-      JobFitCheck was built after realizing most people apply to jobs without
-      knowing whether they’re actually a match. A small difference in keywords
-      or skills can decide whether your resume gets noticed or ignored.
-    </p>
-
-    <p className="text-gray-600 mt-3 leading-relaxed">
-      This tool gives you an instant match score so you can improve your resume
-      before applying instead of guessing afterward.
-    </p>
-  </div>
-</div>
-    </main>
-  );
-}
+  </main>
+);}
