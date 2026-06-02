@@ -62,12 +62,13 @@ export default function Home() {
     }
   };
 
-  return (<main className="min-h-screen bg-[#0b0f19] text-[#f8fafc] px-4 py-12">
+  return (
+  <main className="min-h-screen bg-slate-50 text-gray-900 px-4 py-12">
       <div className="max-w-2xl mx-auto">
 
         <div className="mb-10 text-center">
-          <h1 className="text-4xl font-bold text-[#f8fafc] mb-2">JobFitCheck</h1>
-          <p className="text-[#64748b] text-lg">
+          <h1 className="text-4xl font-bold text-gray-900 mb-2">JobFitCheck</h1>
+          <p className="text-gray-600 text-lg">
             AI agent that scores how well your resume fits any job
           </p>
         </div>

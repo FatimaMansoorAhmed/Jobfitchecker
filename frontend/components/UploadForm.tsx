@@ -16,13 +16,14 @@ export default function UploadForm({ onAnalyze, loading }: Props) {
     onAnalyze(resume, jobUrl);
   };
 
-  return (<div className="bg-[#151d30] rounded-2xl p-6 mb-6 border border-[#222f4c]">
+  return (
+    <div className="bg-gray-900 rounded-2xl p-6 mb-6 border border-gray-800">
 
       <div className="mb-4">
-        <label className="block text-sm text-[#64748b] mb-2">Resume (PDF)</label>
-        <label className="flex items-center gap-3 border-2 border-dashed border-[#222f4c] rounded-xl p-4 cursor-pointer hover:border-[#06b6d4] transition-colors">
-          <Upload size={20} className="text-[#06b6d4]" />
-          <span className="text-[#64748b] text-sm">
+        <label className="block text-sm text-gray-400 mb-2">Resume (PDF)</label>
+        <label className="flex items-center gap-3 border-2 border-dashed border-gray-700 rounded-xl p-4 cursor-pointer hover:border-purple-500 transition-colors">
+          <Upload size={20} className="text-purple-400" />
+          <span className="text-gray-300 text-sm">
             {resume ? resume.name : "Click to upload your resume"}
           </span>
           <input
@@ -35,15 +36,15 @@ export default function UploadForm({ onAnalyze, loading }: Props) {
       </div>
 
       <div className="mb-6">
-        <label className="block text-sm text-[#64748b] mb-2">Job posting URL</label>
-        <div className="flex items-center gap-2 bg-[#0b0f19] rounded-xl px-4 py-3 border border-[#222f4c] focus-within:border-[#06b6d4] transition-colors">
-          <Link size={16} className="text-[#06b6d4] shrink-0" />
+        <label className="block text-sm text-gray-400 mb-2">Job posting URL</label>
+        <div className="flex items-center gap-2 bg-gray-800 rounded-xl px-4 py-3 border border-gray-700 focus-within:border-purple-500 transition-colors">
+          <Link size={16} className="text-purple-400 shrink-0" />
           <input
             type="text"
             placeholder="https://rozee.pk/job/..."
             value={jobUrl}
             onChange={(e) => setJobUrl(e.target.value)}
-            className="bg-transparent text-[#f8fafc] text-sm w-full outline-none placeholder-[#64748b]"
+            className="bg-transparent text-white text-sm w-full outline-none placeholder-gray-600"
           />
         </div>
       </div>
@@ -51,7 +52,7 @@ export default function UploadForm({ onAnalyze, loading }: Props) {
       <button
         onClick={handleSubmit}
         disabled={loading}
-        className="w-full bg-[#06b6d4] hover:bg-[#22d3ee] disabled:bg-[#222f4c] disabled:text-[#64748b] disabled:cursor-not-allowed text-[#0f172a] font-semibold py-3 rounded-xl transition-colors shadow-lg shadow-[#06b6d4]/10"
+        className="w-full bg-purple-600 hover:bg-purple-500 disabled:bg-gray-700 disabled:cursor-not-allowed text-white font-semibold py-3 rounded-xl transition-colors"
       >
         {loading ? "Analyzing..." : "Analyze "}
       </button>
