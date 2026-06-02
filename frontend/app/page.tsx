@@ -64,40 +64,30 @@ export default function Home() {
 
   return (
   <main className="min-h-screen bg-slate-50 text-gray-900 px-4 py-12">
-      <div className="max-w-2xl mx-auto">
+     <div className="mt-8 max-w-xl mx-auto text-left relative">
+  {/* subtle background glow */}
+  <div className="absolute -left-4 top-0 w-1 h-full bg-gradient-to-b from-blue-500 to-transparent rounded-full opacity-70"></div>
 
-        <div className="mb-10 text-center">
-          <h1 className="text-4xl font-bold text-gray-900 mb-2">JobFitCheck</h1>
-          <p className="text-gray-600 text-lg">
-            AI agent that scores how well your resume fits any job
-            Upload your resume and compare it against any job posting in under 30 seconds.
-          </p>
-          
-<div className="mb-8 bg-white p-6 rounded-lg shadow-sm border">
-  <h2 className="text-xl font-semibold mb-3">
-    Why JobFitCheck exists
-  </h2>
+  <div className="pl-4">
+    <div className="flex items-center gap-2 mb-2">
+      <span className="w-2 h-2 bg-blue-500 rounded-full animate-pulse"></span>
+      <p className="text-sm text-blue-600 font-semibold tracking-wide uppercase">
+        Why JobFitCheck exists
+      </p>
+    </div>
 
- 
+    <p className="text-gray-600 leading-relaxed">
+      JobFitCheck was built after realizing most people apply to jobs without
+      knowing whether they’re actually a match. A small difference in keywords
+      or skills can decide whether your resume gets noticed or ignored.
+    </p>
 
-  <p className="text-gray-600 mt-3">
-    JobFitCheck was built to answer one simple question before applying:
-    "How well does my resume fit this job?" Upload your resume, paste a
-    job posting, and get instant feedback on your match.
-  </p>
+    <p className="text-gray-600 mt-3 leading-relaxed">
+      This tool gives you an instant match score so you can improve your resume
+      before applying instead of guessing afterward.
+    </p>
+  </div>
 </div>
-
-        </div>
-
-        <UploadForm onAnalyze={handleAnalyze} loading={loading} />
-
-        {(loading || steps.length > 0) && (
-          <AgentTrace steps={steps} loading={loading} />
-        )}
-
-        {result && <ScoreCard result={result} />}
-
-      </div>
     </main>
   );
 }
