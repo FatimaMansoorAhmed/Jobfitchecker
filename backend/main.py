@@ -24,10 +24,14 @@ def root():
 async def analyze(
     resume: UploadFile = File(...),
     job_url: str = Form(...),
-    job_text: str = Form("")      # ← add this
+    job_text: str = Form("")
 ):
     file_bytes = await resume.read()
     resume_text = extract_text_from_pdf(file_bytes)
+    
+    print(f"DEBUG job_url: {job_url}")        # ← add
+    print(f"DEBUG job_text length: {len(job_text)}")  # ← add
+    print(f"DEBUG job_text preview: {job_text[:100]}") # ← add
 
     initial_state = {
     "resume_text": resume_text,

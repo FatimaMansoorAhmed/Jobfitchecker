@@ -11,7 +11,7 @@ env_path = base_dir / ".env"
 load_dotenv(dotenv_path=env_path)
 # Initialize the Groq LLM
 llm = ChatGroq(
-    model="llama-3.1-8b-instant",
+    model="llama-3.3-70b-versatile",
     temperature=0.1, # Low temperature for accurate parsing
     groq_api_key=os.getenv("GROQ_API_KEY")
 )

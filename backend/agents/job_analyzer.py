@@ -11,7 +11,7 @@ base_dir = Path(__file__).resolve().parent.parent.parent
 load_dotenv(dotenv_path=base_dir / ".env")
 
 llm = ChatGroq(
-    model="llama-3.1-8b-instant",
+    model="llama-3.3-70b-versatile",
     temperature=0.1,
     groq_api_key=os.getenv("GROQ_API_KEY")
 )
@@ -35,7 +35,7 @@ def analyze_job(state: dict) -> dict:
     # Use pasted text if provided, otherwise scrape the URL
     job_text = state.get("job_text", "").strip()
     
-    if not job_text:
+    if not job_text or len(job_text) < 50:
         job_text = scrape_job(state["job_url"])
 
     prompt = f"""
