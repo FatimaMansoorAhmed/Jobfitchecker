@@ -30,15 +30,15 @@ async def analyze(
     resume_text = extract_text_from_pdf(file_bytes)
 
     initial_state = {
-        "resume_text": resume_text,
-        "job_url": job_url,
-        "job_text": job_text,     # ← add this
-        "parsed_resume": {},
-        "parsed_job": {},
-        "gap_analysis": {},
-        "score": {},
-        "coaching": {}
-    }
+    "resume_text": resume_text,
+    "job_url": job_url,
+    "job_text": job_text,      # ← this line MUST be here
+    "parsed_resume": {},
+    "parsed_job": {},
+    "gap_analysis": {},
+    "score": {},
+    "coaching": {}
+}
 
     result = fitcheck_graph.invoke(initial_state)
 
