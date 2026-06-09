@@ -10,6 +10,7 @@ from agents.coach import coach_resume
 class AgentState(TypedDict):
     resume_text: str
     job_url: str
+    job_text: str  
     parsed_resume: Any
     parsed_job: Any
     gap_analysis: Any

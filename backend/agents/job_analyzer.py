@@ -31,10 +31,12 @@ def scrape_job(url: str) -> str:
     except Exception as e:
         return f"Failed to scrape: {str(e)}"
 
-
 def analyze_job(state: dict) -> dict:
-    job_url = state["job_url"]
-    job_text = scrape_job(job_url)
+    # Use pasted text if provided, otherwise scrape the URL
+    job_text = state.get("job_text", "").strip()
+    
+    if not job_text:
+        job_text = scrape_job(state["job_url"])
 
     prompt = f"""
 You are a job description analyzer. Extract structured information from this job posting.

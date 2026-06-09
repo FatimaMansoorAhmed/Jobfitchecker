@@ -11,7 +11,7 @@ app = FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=["*"],    
     allow_methods=["*"],
     allow_headers=["*"],
 )
@@ -20,11 +20,11 @@ app.add_middleware(
 def root():
     return {"status": "JobFitCheck backend running ✅"}
 
-
 @app.post("/analyze")
 async def analyze(
     resume: UploadFile = File(...),
-    job_url: str = Form(...)
+    job_url: str = Form(...),
+    job_text: str = Form("")      # ← add this
 ):
     file_bytes = await resume.read()
     resume_text = extract_text_from_pdf(file_bytes)
@@ -32,6 +32,7 @@ async def analyze(
     initial_state = {
         "resume_text": resume_text,
         "job_url": job_url,
+        "job_text": job_text,     # ← add this
         "parsed_resume": {},
         "parsed_job": {},
         "gap_analysis": {},

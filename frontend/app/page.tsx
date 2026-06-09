@@ -9,7 +9,8 @@ export default function Home() {
   const [loading, setLoading] = useState(false);
   const [steps, setSteps] = useState<string[]>([]);
 
-  const handleAnalyze = async (resume: File, jobUrl: string) => {
+ const handleAnalyze = async (resume: File, jobUrl: string, jobText?: string) => {
+
     setLoading(true);
     setResult(null);
     setSteps([]);
@@ -18,7 +19,7 @@ export default function Home() {
     const formData = new FormData();
     formData.append("resume", resume); // Matches the 'resume' field name expected by your FastAPI route
     formData.append("job_url", jobUrl); // Matches the 'job_url' parameter
-
+     if (jobText) formData.append("job_text", jobText);
     // 2. Start the visual progress trace logs in the background
     const traces = [
       "Parsing your resume...",
@@ -56,7 +57,7 @@ export default function Home() {
       setResult(data);
     } catch (err) {
       console.error("Analysis Request Failed:", err);
-      alert("Could not connect to the backend scanner. Verify Docker containers are active on port 8000.");
+      alert(`Analysis failed: ${err instanceof Error ? err.message : "Unknown error"}`);  
     } finally {
       setLoading(false);
     }
@@ -70,7 +71,7 @@ export default function Home() {
           <h1 className="text-4xl font-bold text-gray-900 mb-2">JobFitCheck</h1>
           <p className="text-gray-600 text-lg">
             
-            AI agent that scores how well your resume fits any job
+            AI agent that scores how well your resume fits any job Using AI Agents
             Upload your resume and compare it against any job posting in under 30 seconds.
           </p>
         </div>
