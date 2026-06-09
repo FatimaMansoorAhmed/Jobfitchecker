@@ -9,7 +9,7 @@ base_dir = Path(__file__).resolve().parent.parent.parent
 load_dotenv(dotenv_path=base_dir / ".env")
 
 llm = ChatGroq(
-    model="llama-3.3-70b-versatile",
+    model="llama-3.1-8b-instant",
     temperature=0.1,
     groq_api_key=os.getenv("GROQ_API_KEY")
 )
