@@ -4,6 +4,8 @@ emoji: 🎯
 colorFrom: purple
 colorTo: blue
 sdk: docker
-app_file: main.py
 pinned: false
 ---
+
+# JobFitCheck Backend
+FastAPI backend for JobFitCheck resume scorer.
