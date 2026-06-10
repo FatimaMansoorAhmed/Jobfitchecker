@@ -68,7 +68,7 @@ export default function UploadForm({ onAnalyze, loading }: Props) {
             }`}
           >
             <Link size={15} />
-            LinkedIn JOB URL OR Any Job Description
+            Drop LinkedIn job URL or paste the full job description text here...
           </button>
        
         </div>
