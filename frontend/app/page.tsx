@@ -19,7 +19,11 @@ export default function Home() {
     const formData = new FormData();
     formData.append("resume", resume); // Matches the 'resume' field name expected by your FastAPI route
     formData.append("job_url", jobUrl); // Matches the 'job_url' parameter
-     if (jobText) formData.append("job_text", jobText);
+     
+if (jobText) formData.append("job_text", jobText);
+
+
+formData.append("job_text", jobText || "");
     // 2. Start the visual progress trace logs in the background
     const traces = [
       "Parsing your resume...",
