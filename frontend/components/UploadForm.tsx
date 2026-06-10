@@ -13,15 +13,16 @@ export default function UploadForm({ onAnalyze, loading }: Props) {
   const [jobText, setJobText] = useState("");
   const [mode, setMode] = useState<"url" | "paste">("url");
 
-const handleSubmit = () => {
+  const handleSubmit = () => {
     if (!resume) return alert("Please upload a resume.");
-    if (!jobUrl.trim()) return alert("Please paste a job URL or job description.");
+    if (mode === "url" && !jobUrl.trim()) return alert("Please paste a LinkedIn job URL.");
+    if (mode === "paste" && !jobText.trim()) return alert("Please paste the job description.");
     
-    const isUrl = jobUrl.trim().startsWith("http");
-    if (isUrl) {
-      onAnalyze(resume, jobUrl.trim(), "");
+    // Key fix: only send what's relevant to the selected mode
+    if (mode === "url") {
+      onAnalyze(resume, jobUrl, "");
     } else {
-      onAnalyze(resume, "https://placeholder.com", jobUrl.trim());
+      onAnalyze(resume, "https://placeholder.com", jobText);
     }
   };
 
@@ -88,7 +89,7 @@ const handleSubmit = () => {
             <Link size={18} className="text-gray-400 shrink-0" />
             <input
               type="text"
-              placeholder="Paste a linkedIn Url Or Paste any job description"
+              placeholder="https://linkedin.com/jobs/..."
               value={jobUrl}
               onChange={(e) => setJobUrl(e.target.value)}
               className="bg-transparent text-white text-sm w-full outline-none placeholder:text-gray-600"
@@ -97,7 +98,23 @@ const handleSubmit = () => {
         )}
 
         {/* Paste Textarea */}
-   
+        {mode === "paste" && (
+          <div className="bg-black rounded-2xl px-5 py-4 border border-[#2a2a2a] focus-within:border-white/30 transition-all duration-300">
+            <div className="flex items-center gap-2 mb-3 pb-3 border-b border-[#1a1a1a]">
+              <FileText size={16} className="text-gray-400" />
+              <span className="text-gray-500 text-xs">
+                Paste from Indeed, Rozee.pk, or any job board
+              </span>
+            </div>
+            <textarea
+              rows={7}
+              placeholder="Copy and paste the full job description here..."
+              value={jobText}
+              onChange={(e) => setJobText(e.target.value)}
+              className="bg-transparent text-white text-sm w-full outline-none placeholder:text-gray-600 resize-none"
+            />
+          </div>
+        )}
       </div>
 
       {/* Submit */}
