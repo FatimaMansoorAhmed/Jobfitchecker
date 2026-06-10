@@ -17,14 +17,14 @@ export default function UploadForm({ onAnalyze, loading }: Props) {
     const trimmedInput = jobInput.trim();
     if (!trimmedInput) return alert("Please provide a LinkedIn URL or paste a job description.");
 
-    // Simple check: if it starts with http:// or https://, treat it as a URL
+    // Check agar input URL hai (starts with http:// or https://)
     const isUrl = /^https?:\/\//i.test(trimmedInput);
 
     if (isUrl) {
-      // Pass the input as the URL, and an empty string for text
+      // Agar URL hai tou jobUrl field me bhejdo
       onAnalyze(resume, trimmedInput, "");
     } else {
-      // Pass a placeholder URL, and the input as the job text description
+      // Agar text (JD) hai tou placeholder URL aur jobText me actual text bhejdo
       onAnalyze(resume, "https://placeholder.com", trimmedInput);
     }
   };
@@ -56,19 +56,19 @@ export default function UploadForm({ onAnalyze, loading }: Props) {
         </label>
       </div>
 
-      {/* Unified Job Input Field */}
+      {/* Single Unified Input Field */}
       <div className="mb-4">
         <label className="block text-sm text-gray-500 uppercase tracking-wide mb-3">
-          Job Information
+          Job Link or Description
         </label>
         <div className="flex gap-3 bg-black rounded-2xl px-5 py-4 border border-[#2a2a2a] focus-within:border-white/30 transition-all duration-300">
-          <Briefcase size={18} className="text-gray-400 shrink-0 mt-0.5" />
+          <Briefcase size={18} className="text-gray-400 shrink-0 mt-1" />
           <textarea
             placeholder="Paste LinkedIn job URL OR paste the full job description text here..."
             value={jobInput}
             onChange={(e) => setJobInput(e.target.value)}
             rows={4}
-            className="bg-transparent text-white text-sm w-full outline-none placeholder:text-gray-600 resize-y min-h-[45px]"
+            className="bg-transparent text-white text-sm w-full outline-none placeholder:text-gray-600 resize-y min-h-[60px]"
           />
         </div>
       </div>
