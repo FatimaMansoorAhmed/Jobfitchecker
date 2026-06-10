@@ -68,7 +68,7 @@ export default function UploadForm({ onAnalyze, loading }: Props) {
             }`}
           >
             <Link size={15} />
-            LinkedIn URL
+            LinkedIn JOB URL OR Any Job Description
           </button>
        
         </div>
@@ -79,7 +79,7 @@ export default function UploadForm({ onAnalyze, loading }: Props) {
             <Link size={18} className="text-gray-400 shrink-0" />
             <input
               type="text"
-              placeholder="https://linkedin.com/jobs/..&  Paste Any Job Descriptipm."
+              placeholder="https://linkedin.com/jobs/..&  Paste Any Job Description."
               value={jobUrl}
               onChange={(e) => setJobUrl(e.target.value)}
               className="bg-transparent text-white text-sm w-full outline-none placeholder:text-gray-600"
