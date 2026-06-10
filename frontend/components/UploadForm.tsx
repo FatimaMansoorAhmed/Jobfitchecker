@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import { Upload, Link, FileText } from "lucide-react";
+import { Upload, Briefcase } from "lucide-react";
 
 interface Props {
   onAnalyze: (resume: File, jobUrl: string, jobText?: string) => void;
@@ -9,20 +9,23 @@ interface Props {
 
 export default function UploadForm({ onAnalyze, loading }: Props) {
   const [resume, setResume] = useState<File | null>(null);
-  const [jobUrl, setJobUrl] = useState("");
-  const [jobText, setJobText] = useState("");
-  const [mode, setMode] = useState<"url" | "paste">("url");
+  const [jobInput, setJobInput] = useState("");
 
   const handleSubmit = () => {
     if (!resume) return alert("Please upload a resume.");
-    if (mode === "url" && !jobUrl.trim()) return alert("Please paste a LinkedIn job URL.");
-    if (mode === "paste" && !jobText.trim()) return alert("Please paste the job description.");
     
-    // Key fix: only send what's relevant to the selected mode
-    if (mode === "url") {
-      onAnalyze(resume, jobUrl, "");
+    const trimmedInput = jobInput.trim();
+    if (!trimmedInput) return alert("Please provide a LinkedIn URL or paste a job description.");
+
+    // Simple check: if it starts with http:// or https://, treat it as a URL
+    const isUrl = /^https?:\/\//i.test(trimmedInput);
+
+    if (isUrl) {
+      // Pass the input as the URL, and an empty string for text
+      onAnalyze(resume, trimmedInput, "");
     } else {
-      onAnalyze(resume, "https://placeholder.com", jobText);
+      // Pass a placeholder URL, and the input as the job text description
+      onAnalyze(resume, "https://placeholder.com", trimmedInput);
     }
   };
 
@@ -53,68 +56,21 @@ export default function UploadForm({ onAnalyze, loading }: Props) {
         </label>
       </div>
 
-      {/* Toggle Tabs */}
+      {/* Unified Job Input Field */}
       <div className="mb-4">
         <label className="block text-sm text-gray-500 uppercase tracking-wide mb-3">
-          Job Posting
+          Job Information
         </label>
-        <div className="flex bg-black rounded-2xl p-1 border border-[#2a2a2a] mb-4">
-          <button
-            onClick={() => { setMode("url"); setJobText(""); }}
-            className={`flex-1 flex items-center justify-center gap-2 py-3 rounded-xl text-sm font-medium transition-all duration-200 ${
-              mode === "url"
-                ? "bg-white text-black"
-                : "text-gray-500 hover:text-gray-300"
-            }`}
-          >
-            <Link size={15} />
-            LinkedIn URL
-          </button>
-          <button
-            onClick={() => { setMode("paste"); setJobUrl(""); }}
-            className={`flex-1 flex items-center justify-center gap-2 py-3 rounded-xl text-sm font-medium transition-all duration-200 ${
-              mode === "paste"
-                ? "bg-white text-black"
-                : "text-gray-500 hover:text-gray-300"
-            }`}
-          >
-            <FileText size={15} />
-            Paste Job Description
-          </button>
+        <div className="flex gap-3 bg-black rounded-2xl px-5 py-4 border border-[#2a2a2a] focus-within:border-white/30 transition-all duration-300">
+          <Briefcase size={18} className="text-gray-400 shrink-0 mt-0.5" />
+          <textarea
+            placeholder="Paste LinkedIn job URL OR paste the full job description text here..."
+            value={jobInput}
+            onChange={(e) => setJobInput(e.target.value)}
+            rows={4}
+            className="bg-transparent text-white text-sm w-full outline-none placeholder:text-gray-600 resize-y min-h-[45px]"
+          />
         </div>
-
-        {/* URL Input */}
-        {mode === "url" && (
-          <div className="flex items-center gap-3 bg-black rounded-2xl px-5 py-4 border border-[#2a2a2a] focus-within:border-white/30 transition-all duration-300">
-            <Link size={18} className="text-gray-400 shrink-0" />
-            <input
-              type="text"
-              placeholder="https://linkedin.com/jobs/..."
-              value={jobUrl}
-              onChange={(e) => setJobUrl(e.target.value)}
-              className="bg-transparent text-white text-sm w-full outline-none placeholder:text-gray-600"
-            />
-          </div>
-        )}
-
-        {/* Paste Textarea */}
-        {mode === "paste" && (
-          <div className="bg-black rounded-2xl px-5 py-4 border border-[#2a2a2a] focus-within:border-white/30 transition-all duration-300">
-            <div className="flex items-center gap-2 mb-3 pb-3 border-b border-[#1a1a1a]">
-              <FileText size={16} className="text-gray-400" />
-              <span className="text-gray-500 text-xs">
-                Paste from Indeed, Rozee.pk, or any job board
-              </span>
-            </div>
-            <textarea
-              rows={7}
-              placeholder="Copy and paste the full job description here..."
-              value={jobText}
-              onChange={(e) => setJobText(e.target.value)}
-              className="bg-transparent text-white text-sm w-full outline-none placeholder:text-gray-600 resize-none"
-            />
-          </div>
-        )}
       </div>
 
       {/* Submit */}
